@@ -5,26 +5,21 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
-use App\Task;
-use App\Log;
+use App\Models\Task;
+use App\Models\Log;
 
 class TaskController extends Controller
 {
     public function index()
     {
-        $articles = DB::table('tasks')->get();
+        $articles = Task::all();
         return view('index')->with('articles', $articles);
     }
 
     public function counter($id)
     {
-        DB::table('tasks')
-            ->where('id', $id)
-            ->increment('counter');
-        DB::table('logs')
-            ->insert(
-                ['task_id' => $id]
-            );
+        Task::where('id', $id)->increment('counter');
+        Log::insert(['task_id' => $id]);
         return redirect('/');
     }
 
@@ -36,9 +31,10 @@ class TaskController extends Controller
 
     public function add()
     {
-        $query = DB::table('logs')->where('status', 0)->first();
+
+        $query = Log::where('status', 0)->first();
         if (!empty($query)) {
-            DB::update("update logs set status = 1 where id = $query->id");
+            Log::where('id', $query->id)->update(['status'=> 1]);
             $url = 'queue?id=' . $query->id;
         } else {
             $url = 'queue';
