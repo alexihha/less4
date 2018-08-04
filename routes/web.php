@@ -16,7 +16,12 @@
 
 
 Route::get('/', 'TaskController@index');
+
 Route::get('/queue', 'TaskController@queue');
+Route::get('/done', 'TaskController@done');
+
+
+
 Route::get('/add', 'TaskController@add');
 Route::get('/{id}', 'TaskController@counter');
 

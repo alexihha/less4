@@ -31,16 +31,7 @@
             <span class="navbar-toggler-icon"></span>
         </button>
     </div>
-    <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
-        <ul class="navbar-nav ml-auto">
 
-            <li class="nav-item">
-                <form class="form-inline" action="add">
-                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">В работу</button>
-                </form>
-            </li>
-        </ul>
-    </div>
 </nav>
 
 

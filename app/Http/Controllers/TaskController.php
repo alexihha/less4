@@ -29,6 +29,12 @@ class TaskController extends Controller
         return view('queue')->with('articles', $articles);
     }
 
+
+    public function done(){
+        $articles = Log::all()->where('status', 1)->sortByDesc('created_at');
+        return view('queue')->with('articles', $articles);
+    }
+
     public function add()
     {
 
